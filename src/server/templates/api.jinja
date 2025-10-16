@@ -1,0 +1,38 @@
+{% extends "base.jinja" %}
+{% block title %}API Documentation - YouTube to Doc{% endblock %}
+{% block content %}
+<h1>📚 API Documentation</h1>
+<p class="subtitle">YouTube to Doc MVP - Simple REST API</p>
+<div class="result-container">
+    <h2>Endpoints</h2>
+    <div style="margin-bottom: 30px;">
+        <h3 style="color: #667eea; margin-bottom: 10px;">GET /</h3>
+        <p><strong>Description:</strong> Home page with video processing form</p>
+        <p><strong>Response:</strong> HTML page</p>
+    </div>
+    <div style="margin-bottom: 30px;">
+        <h3 style="color: #667eea; margin-bottom: 10px;">POST /</h3>
+        <p><strong>Description:</strong> Process a YouTube video</p>
+        <p><strong>Parameters:</strong></p>
+        <ul style="margin-left: 20px; color: #666; font-size: 13px;">
+            <li><code>input_text</code> (required): YouTube video URL</li>
+        </ul>
+        <p style="margin-top: 10px;"><strong>Response:</strong> HTML with generated documentation</p>
+    </div>
+    <div style="margin-bottom: 30px;">
+        <h3 style="color: #667eea; margin-bottom: 10px;">GET /health</h3>
+        <p><strong>Description:</strong> Health check endpoint</p>
+        <p><strong>Response:</strong> JSON with status</p>
+    </div>
+    <h2 style="margin-top: 30px;">Supported YouTube URL Formats</h2>
+    <ul style="margin-left: 20px; color: #666; font-size: 13px;">
+        <li><code>https://www.youtube.com/watch?v=VIDEO_ID</code></li>
+        <li><code>https://youtu.be/VIDEO_ID</code></li>
+        <li><code>https://www.youtube.com/embed/VIDEO_ID</code></li>
+        <li><code>https://www.youtube.com/v/VIDEO_ID</code></li>
+    </ul>
+</div>
+<div style="text-align: center; margin-top: 40px; color: #999; font-size: 12px;">
+    <p>YouTube to Doc MVP v1.0.0</p>
+</div>
+{% endblock %}
