@@ -1,0 +1,47 @@
+{% extends "base.jinja" %}
+{% block title %}YouTube to Doc - Convert Videos to Documentation{% endblock %}
+{% block content %}
+<h1>🎬 YouTube to Doc MVP</h1>
+<p class="subtitle">Convert YouTube videos to comprehensive documentation</p>
+{% if error_message %}<div class="error-message">{{ error_message }}</div>{% endif %}
+{% if result %}<div class="success-message">✓ Documentation generated successfully!</div>{% endif %}
+<form method="POST" action="/">
+    <div class="form-group">
+        <label for="input_text">YouTube Video URL</label>
+        <input type="text" id="input_text" name="input_text" placeholder="https://www.youtube.com/watch?v=..." value="{{ video_url or '' }}" required />
+    </div>
+    <button type="submit">📄 Generate Documentation</button>
+</form>
+{% if examples %}
+<div class="examples">
+    <h3>Example Videos</h3>
+    <div class="example-list">
+        {% for example in examples %}
+        <div class="example-item" onclick="document.getElementById('input_text').value = '{{ example.url }}'; document.querySelector('form').submit();">
+            {{ example.name }}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% if result and video_info %}
+<div class="result-container">
+    <h2>📊 Video Information</h2>
+    <div class="video-info">
+        <p><strong>Title:</strong> {{ video_info.title }}</p>
+        <p><strong>URL:</strong> <a href="{{ video_info.url }}" target="_blank">{{ video_info.url }}</a></p>
+        <p><strong>Duration:</strong> {{ video_info.duration }}</p>
+        <p><strong>Views:</strong> {{ video_info.view_count }}</p>
+        <p><strong>Channel:</strong> {{ video_info.channel }}</p>
+        <p><strong>Upload Date:</strong> {{ video_info.upload_date }}</p>
+    </div>
+    {% if content %}
+    <h2>📝 Documentation</h2>
+    <pre class="transcript">{{ content }}</pre>
+    <button class="copy-btn" onclick="navigator.clipboard.writeText(document.querySelector('.transcript').textContent); alert('Copied to clipboard!');">
+        📋 Copy to Clipboard
+    </button>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}
